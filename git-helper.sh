@@ -1,8 +1,8 @@
 #!/bin/bash
 
 usage() {
-    echo "Example usage: $0 -p <project_path> -m [<commit_message>] -b [<branch>]"
-    echo "  -p <project_path>     : Path to the application directory (required)"
+    echo "Example usage: $0 -p [project_path] -m [commit_message] -b [branch]"
+    echo "  -p <project_path>     : Path to the application directory (default: current directory)"
     echo "  -m <commit_message>   : Commit message (default: random string of words)"
     echo "  -b <branch>           : Branch to checkout (default: main)"
     exit 1
@@ -69,7 +69,9 @@ if [[ -z "$COMMIT_MESSAGE" ]]; then
     COMMIT_MESSAGE=$(random_words)
 fi
 
-cd $APP_DIR
+if [[ -z "$APP_DIR" ]]; then
+    cd $APP_DIR
+fi
 
 git add .
 git commit -m "$COMMIT_MESSAGE"
