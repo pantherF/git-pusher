@@ -68,7 +68,7 @@ if [[ -z "$COMMIT_MESSAGE" ]]; then
     COMMIT_MESSAGE=$(random_words)
 fi
 
-if [[ -z "$APP_DIR" ]]; then
+if [[ -n "$APP_DIR" ]]; then
     cd $APP_DIR
 fi
 
