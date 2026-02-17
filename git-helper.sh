@@ -1,10 +1,12 @@
 #!/bin/bash
 
 usage() {
-    echo "Example usage: $0 -p [project_path] -m [commit_message] -b [branch]"
+    echo "  -h                    : This usage dialog"
     echo "  -p <project_path>     : Path to the application directory (default: current directory)"
     echo "  -m <commit_message>   : Commit message (default: random string of words)"
     echo "  -b <branch>           : Branch to checkout (default: main)"
+    echo " "
+    echo "Example usage: $0 -p [project_path] -m [commit_message] -b [branch]"
     exit 1
 }
 
@@ -12,7 +14,7 @@ APP_DIR=""
 COMMIT_MESSAGE=""
 BRANCH_NAME="main" # Default branch name
 
-while getopts ":p:m:b:" opt; do
+while getopts ":p:m:b:h" opt; do
     case ${opt} in
         p)
             APP_DIR=$OPTARG
@@ -23,6 +25,9 @@ while getopts ":p:m:b:" opt; do
         b)
             BRANCH_NAME=$OPTARG
             ;;
+	h)
+	    usage
+	    ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
             usage
@@ -66,6 +71,8 @@ fi
 if [[ -z "$APP_DIR" ]]; then
     cd $APP_DIR
 fi
+
+echo "Currently in directory: $APP_DIR"
 
 git add .
 git commit -m "$COMMIT_MESSAGE"
