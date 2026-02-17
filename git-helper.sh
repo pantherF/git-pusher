@@ -72,7 +72,8 @@ if [[ -z "$APP_DIR" ]]; then
     cd $APP_DIR
 fi
 
-echo "Currently in directory: $APP_DIR"
+echo "Currently in directory:"
+pwd
 
 git add .
 git commit -m "$COMMIT_MESSAGE"
