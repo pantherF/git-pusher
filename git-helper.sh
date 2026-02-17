@@ -34,12 +34,6 @@ while getopts ":p:m:b:" opt; do
     esac
 done
 
-# Check required arguments
-if [[ -z "$APP_DIR" ]]; then
-    echo "ERROR: Project path is required."
-    usage
-fi
-
 function random_words() {
     random=$(shuf -i 1-10 -n 1)
     response=$(curl -s "https://random-word-api.herokuapp.com/word?number=$random")
